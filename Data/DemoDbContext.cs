@@ -15,7 +15,6 @@ namespace Data
         {
         }
 
-        public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
         public virtual DbSet<PremodemCustomerStore> PremodemCustomerStore { get; set; }
         public virtual DbSet<PremodemDeliveryrate> PremodemDeliveryrate { get; set; }
         public virtual DbSet<PremodemEnergy> PremodemEnergy { get; set; }
