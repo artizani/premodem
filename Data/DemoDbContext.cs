@@ -15,14 +15,6 @@ namespace Data
         {
         }
 
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Assets> Assets { get; set; }
-        public virtual DbSet<LoanDetails> LoanDetails { get; set; }
-        public virtual DbSet<Loans> Loans { get; set; }
         public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
         public virtual DbSet<PremodemCustomerStore> PremodemCustomerStore { get; set; }
         public virtual DbSet<PremodemDeliveryrate> PremodemDeliveryrate { get; set; }
@@ -35,7 +27,6 @@ namespace Data
         public virtual DbSet<PremodemOrg> PremodemOrg { get; set; }
         public virtual DbSet<PremodemParts> PremodemParts { get; set; }
         public virtual DbSet<PremodemPeople> PremodemPeople { get; set; }
-        public virtual DbSet<ProfileInfoes> ProfileInfoes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,137 +39,7 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AspNetRoles>(entity =>
-            {
-                entity.HasIndex(e => e.Name)
-                    .HasName("RoleNameIndex")
-                    .IsUnique();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(256);
-            });
-
-            modelBuilder.Entity<AspNetUserClaims>(entity =>
-            {
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_UserId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<AspNetUserLogins>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId });
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_UserId");
-
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
-
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<AspNetUserRoles>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
-
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("IX_RoleId");
-
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_UserId");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId");
-            });
-
-            modelBuilder.Entity<AspNetUsers>(entity =>
-            {
-                entity.HasIndex(e => e.ProfileInfoId)
-                    .HasName("IX_ProfileInfo_Id");
-
-                entity.HasIndex(e => e.UserName)
-                    .HasName("UserNameIndex")
-                    .IsUnique();
-
-                entity.Property(e => e.Email).HasMaxLength(256);
-
-                entity.Property(e => e.LockoutEndDateUtc).HasColumnType("datetime");
-
-                entity.Property(e => e.ProfileInfoId).HasColumnName("ProfileInfo_Id");
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasMaxLength(256);
-
-                entity.HasOne(d => d.ProfileInfo)
-                    .WithMany(p => p.AspNetUsers)
-                    .HasForeignKey(d => d.ProfileInfoId)
-                    .HasConstraintName("FK_dbo.AspNetUsers_dbo.ProfileInfoes_ProfileInfo_Id");
-            });
-
-            modelBuilder.Entity<Assets>(entity =>
-            {
-                entity.Property(e => e.Discriminator)
-                    .IsRequired()
-                    .HasMaxLength(128);
-            });
-
-            modelBuilder.Entity<LoanDetails>(entity =>
-            {
-                entity.HasIndex(e => e.AssetId)
-                    .HasName("IX_Asset_Id");
-
-                entity.HasIndex(e => e.LoanId)
-                    .HasName("IX_LoanId");
-
-                entity.Property(e => e.AssetId).HasColumnName("Asset_Id");
-
-                entity.HasOne(d => d.Asset)
-                    .WithMany(p => p.LoanDetails)
-                    .HasForeignKey(d => d.AssetId)
-                    .HasConstraintName("FK_dbo.LoanDetails_dbo.Assets_Asset_Id");
-
-                entity.HasOne(d => d.Loan)
-                    .WithMany(p => p.LoanDetails)
-                    .HasForeignKey(d => d.LoanId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_dbo.LoanDetails_dbo.Loans_LoanId");
-            });
-
-            modelBuilder.Entity<Loans>(entity =>
-            {
-                entity.HasIndex(e => e.Id)
-                    .HasName("IX_Id");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.End).HasColumnType("datetime");
-
-                entity.Property(e => e.Start).HasColumnType("datetime");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.Loans)
-                    .HasForeignKey<Loans>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_dbo.Loans_dbo.ProfileInfoes_Id");
-            });
+         
 
             modelBuilder.Entity<MigrationHistory>(entity =>
             {
@@ -569,10 +430,7 @@ namespace Data
                 entity.Property(e => e.Roles).HasColumnName("roles");
             });
 
-            modelBuilder.Entity<ProfileInfoes>(entity =>
-            {
-                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
-            });
+           
         }
     }
 }
