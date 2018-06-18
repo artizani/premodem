@@ -11,24 +11,24 @@ namespace EfData.Repository
     public class ExpenseRepository
     {
         
-        private readonly PremodemContext _Context;
-        private readonly ILogger _Logger;
+        private readonly PremodemContext _context;
+        private readonly ILogger _logger;
 
         public ExpenseRepository(PremodemContext context, ILoggerFactory loggerFactory) {
-          _Context = context;
-          _Logger = loggerFactory.CreateLogger("Premodem Repository");
+          _context = context;
+          _logger = loggerFactory.CreateLogger("Premodem Repository");
         }
 
         public async Task<List<PremodemExpense>> GetExpensesAsync()
         {
-            return await _Context.PremodemExpense.OrderBy(c => c.Date)
+            return await _context.PremodemExpense.OrderBy(c => c.Date)
                                  .Include(c => c.Title).ToListAsync();
         }
 
         public async Task<PagingResult<PremodemExpense>> GetExpensesPageAsync(int skip, int take)
         {
-            var totalRecords = await _Context.PremodemExpense.CountAsync();
-            var expenses = await _Context.PremodemExpense
+            var totalRecords = await _context.PremodemExpense.CountAsync();
+            var expenses = await _context.PremodemExpense
                                  .OrderBy(c => c.Date)
                                  .Include(c => c.Id)
                                  .Include(c => c.Id)
@@ -40,21 +40,21 @@ namespace EfData.Repository
 
         public async Task<PremodemExpense> GetCustomerAsync(int id)
         {
-            return await _Context.PremodemExpense
+            return await _context.PremodemExpense
                                  .Include(c => c.Date)
                                  .SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<PremodemExpense> InsertCustomerAsync(PremodemExpense customer)
         {
-            _Context.Add(customer);
+            _context.Add(customer);
             try
             {
-              await _Context.SaveChangesAsync();
+              await _context.SaveChangesAsync();
             }
             catch (System.Exception exp)
             {
-               _Logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
             }
 
             return customer;
@@ -63,15 +63,15 @@ namespace EfData.Repository
         public async Task<bool> UpdateCustomerAsync(PremodemExpense customer)
         {
             //Will update all properties of the Customer
-            _Context.PremodemExpense.Attach(customer);
-            _Context.Entry(customer).State = EntityState.Modified;
+            _context.PremodemExpense.Attach(customer);
+            _context.Entry(customer).State = EntityState.Modified;
             try
             {
-              return (await _Context.SaveChangesAsync() > 0 ? true : false);
+              return (await _context.SaveChangesAsync() > 0 ? true : false);
             }
             catch (Exception exp)
             {
-               _Logger.LogError($"Error in {nameof(UpdateCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(UpdateCustomerAsync)}: " + exp.Message);
             }
             return false;
         }
@@ -81,17 +81,17 @@ namespace EfData.Repository
             //Extra hop to the database but keeps it nice and simple for this demo
             //Including orders since there's a foreign-key constraint and we need
             //to remove the orders in addition to the customer
-            var customer = await _Context.PremodemExpense
+            var customer = await _context.PremodemExpense
                                 .Include(c => c.Date)
                                 .SingleOrDefaultAsync(c => c.Id == id);
-            _Context.Remove(customer);
+            _context.Remove(customer);
             try
             {
-              return (await _Context.SaveChangesAsync() > 0 ? true : false);
+              return (await _context.SaveChangesAsync() > 0 ? true : false);
             }
             catch (System.Exception exp)
             {
-               _Logger.LogError($"Error in {nameof(DeleteCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(DeleteCustomerAsync)}: " + exp.Message);
             }
             return false;
         }
