@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Domain
+namespace Premodem.Domain
 {
-    public class PremodemOrg
+    public partial class PremodemOrg
     {
         public PremodemOrg()
         {
