@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using Premodem.Domain;
 
-
-namespace Premodem.Data
+namespace EfData
 {
     public class PremodemContext : DbContext
     {

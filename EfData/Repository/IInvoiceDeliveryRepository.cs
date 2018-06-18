@@ -1,4 +1,4 @@
-﻿namespace Premodem.Domain.Repository
+﻿namespace EfData.Repository
 {
     public interface IInvoiceDeliveryRepository
     {

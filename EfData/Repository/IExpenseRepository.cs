@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Premodem.Domain;
 
-namespace Domain.Repository
+namespace EfData.Repository
 {
     public interface IExpenseRepository
     {
