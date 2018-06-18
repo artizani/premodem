@@ -8,7 +8,7 @@ using Premodem.Domain;
 
 namespace EfData.Repository
 {
-    public class ExpenseRepository
+    public class ExpenseRepository : IExpenseRepository
     {
         
         private readonly PremodemContext _context;
@@ -38,14 +38,14 @@ namespace EfData.Repository
             return new PagingResult<PremodemExpense>(expenses, totalRecords);
         }
 
-        public async Task<PremodemExpense> GetCustomerAsync(int id)
+        public async Task<PremodemExpense> GetExpenseAsync(int id)
         {
             return await _context.PremodemExpense
                                  .Include(c => c.Date)
                                  .SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<PremodemExpense> InsertCustomerAsync(PremodemExpense customer)
+        public async Task<PremodemExpense> InsertExpenseAsync(PremodemExpense customer)
         {
             _context.Add(customer);
             try
@@ -54,13 +54,13 @@ namespace EfData.Repository
             }
             catch (System.Exception exp)
             {
-               _logger.LogError($"Error in {nameof(InsertCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(InsertExpenseAsync)}: " + exp.Message);
             }
 
             return customer;
         }
 
-        public async Task<bool> UpdateCustomerAsync(PremodemExpense customer)
+        public async Task<bool> UpdateExpenseAsync(PremodemExpense customer)
         {
             //Will update all properties of the Customer
             _context.PremodemExpense.Attach(customer);
@@ -71,12 +71,12 @@ namespace EfData.Repository
             }
             catch (Exception exp)
             {
-               _logger.LogError($"Error in {nameof(UpdateCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(UpdateExpenseAsync)}: " + exp.Message);
             }
             return false;
         }
 
-        public async Task<bool> DeleteCustomerAsync(int id)
+        public async Task<bool> DeleteExpenseAsync(int id)
         {
             //Extra hop to the database but keeps it nice and simple for this demo
             //Including orders since there's a foreign-key constraint and we need
@@ -91,7 +91,7 @@ namespace EfData.Repository
             }
             catch (System.Exception exp)
             {
-               _logger.LogError($"Error in {nameof(DeleteCustomerAsync)}: " + exp.Message);
+               _logger.LogError($"Error in {nameof(DeleteExpenseAsync)}: " + exp.Message);
             }
             return false;
         }
