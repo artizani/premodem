@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Domain
 {
-    public partial class PremodemEnergy
+    public class PremodemEnergy
     {
         public int Id { get; set; }
         public int? Item { get; set; }

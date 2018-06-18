@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Domain
 {
-    public partial class PremodemInvoiceDelivery
+    public class PremodemInvoiceDelivery
     {
         public int? Number { get; set; }
         public DateTime? Invdate { get; set; }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Domain
 {
-    public partial class PremodemGenerator
+    public class PremodemGenerator
     {
         public int Id { get; set; }
         public decimal? Slacktime { get; set; }

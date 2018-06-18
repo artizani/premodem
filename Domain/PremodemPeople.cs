@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Domain
 {
-    public partial class PremodemPeople
+    public class PremodemPeople
     {
         public PremodemPeople()
         {

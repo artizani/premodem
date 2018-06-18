@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Data
+namespace Domain
 {
-    public partial class PremodemCustomerStore
+    public class PremodemCustomerStore
     {
         public int CustomerId { get; set; }
         public int StoreCode { get; set; }
