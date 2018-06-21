@@ -19,13 +19,13 @@ namespace EfData.Repository
           _logger = loggerFactory.CreateLogger("Premodem Repository");
         }
 
-        public async Task<List<PremodemExpense>> GetExpensesAsync()
+        public async Task<List<Expense>> GetExpensesAsync()
         {
             return await _context.PremodemExpense.OrderBy(c => c.Date)
                                  .Include(c => c.Title).ToListAsync();
         }
 
-        public async Task<PagingResult<PremodemExpense>> GetExpensesPageAsync(int skip, int take)
+        public async Task<PagingResult<Expense>> GetExpensesPageAsync(int skip, int take)
         {
             var totalRecords = await _context.PremodemExpense.CountAsync();
             var expenses = await _context.PremodemExpense
@@ -35,17 +35,17 @@ namespace EfData.Repository
                                  .Skip(skip)
                                  .Take(take)
                                  .ToListAsync();
-            return new PagingResult<PremodemExpense>(expenses, totalRecords);
+            return new PagingResult<Expense>(expenses, totalRecords);
         }
 
-        public async Task<PremodemExpense> GetExpenseAsync(int id)
+        public async Task<Expense> GetExpenseAsync(int id)
         {
             return await _context.PremodemExpense
                                  .Include(c => c.Date)
                                  .SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<PremodemExpense> InsertExpenseAsync(PremodemExpense customer)
+        public async Task<Expense> InsertExpenseAsync(Expense customer)
         {
             _context.Add(customer);
             try
@@ -60,7 +60,7 @@ namespace EfData.Repository
             return customer;
         }
 
-        public async Task<bool> UpdateExpenseAsync(PremodemExpense customer)
+        public async Task<bool> UpdateExpenseAsync(Expense customer)
         {
             //Will update all properties of the Customer
             _context.PremodemExpense.Attach(customer);

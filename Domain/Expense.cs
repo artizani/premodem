@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Premodem.Domain
 {
-    public class PremodemExpense
+    public class Expense
     {
-        public PremodemExpense()
+        public Expense()
         {
             PremodemEnergy = new HashSet<PremodemEnergy>();
             PremodemParts = new HashSet<PremodemParts>();

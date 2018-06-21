@@ -7,7 +7,7 @@ namespace Premodem.Domain
     {
         public PremodemPeople()
         {
-            PremodemExpense = new HashSet<PremodemExpense>();
+            PremodemExpense = new HashSet<Expense>();
             PremodemGenerator = new HashSet<PremodemGenerator>();
         }
 
@@ -24,7 +24,7 @@ namespace Premodem.Domain
         public string Bank { get; set; }
         public int? Account { get; set; }
 
-        public ICollection<PremodemExpense> PremodemExpense { get; set; }
+        public ICollection<Expense> PremodemExpense { get; set; }
         public ICollection<PremodemGenerator> PremodemGenerator { get; set; }
     }
 }

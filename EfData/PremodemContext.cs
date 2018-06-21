@@ -15,7 +15,7 @@ namespace EfData
         public virtual DbSet<PremodemCustomerStore> PremodemCustomerStore { get; set; }
         public virtual DbSet<PremodemDeliveryrate> PremodemDeliveryrate { get; set; }
         public virtual DbSet<PremodemEnergy> PremodemEnergy { get; set; }
-        public virtual DbSet<PremodemExpense> PremodemExpense { get; set; }
+        public virtual DbSet<Expense> PremodemExpense { get; set; }
         public virtual DbSet<PremodemExpenseCategory> PremodemExpenseCategory { get; set; }
         public virtual DbSet<PremodemExpenseItem> PremodemExpenseItem { get; set; }
         public virtual DbSet<PremodemGenerator> PremodemGenerator { get; set; }
@@ -109,7 +109,7 @@ namespace EfData
                     .HasConstraintName("Fk_premodem.energy_premodem.expense");
             });
 
-            modelBuilder.Entity<PremodemExpense>(entity =>
+            modelBuilder.Entity<Expense>(entity =>
             {
                 entity.ToTable("premodem.expense");
 
@@ -156,8 +156,8 @@ namespace EfData
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.ItemNavigation)
-                    .WithOne(p => p.PremodemExpense)
-                    .HasForeignKey<PremodemExpense>(d => d.Item)
+                    .WithOne(p => p.Expense)
+                    .HasForeignKey<Expense>(d => d.Item)
                     .HasConstraintName("Fk_premodem.expense_premodem.expense.category");
 
                 entity.HasOne(d => d.PersonnelNavigation)

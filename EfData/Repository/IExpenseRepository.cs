@@ -6,11 +6,11 @@ namespace EfData.Repository
 {
     public interface IExpenseRepository
     {
-        Task<List<PremodemExpense>> GetExpensesAsync();
-        Task<PagingResult<PremodemExpense>> GetExpensesPageAsync(int skip, int take);
-        Task<PremodemExpense> GetExpenseAsync(int id);
-        Task<PremodemExpense> InsertExpenseAsync(PremodemExpense expense);
-        Task<bool> UpdateExpenseAsync(PremodemExpense expense);
+        Task<List<Expense>> GetExpensesAsync();
+        Task<PagingResult<Expense>> GetExpensesPageAsync(int skip, int take);
+        Task<Expense> GetExpenseAsync(int id);
+        Task<Expense> InsertExpenseAsync(Expense expense);
+        Task<bool> UpdateExpenseAsync(Expense expense);
         Task<bool> DeleteExpenseAsync(int id);
     }
 }

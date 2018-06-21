@@ -13,6 +13,6 @@ namespace Premodem.Domain
         public string Description { get; set; }
         public int Expenseid { get; set; }
 
-        public PremodemExpense Expense { get; set; }
+        public Expense Expense { get; set; }
     }
 }

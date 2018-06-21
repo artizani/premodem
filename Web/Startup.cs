@@ -29,7 +29,7 @@ namespace Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             //Add SQL Server support
             services.AddDbContext<PremodemContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("CustomersSqlServerConnectionString"));
+                options.UseSqlServer(Configuration.GetConnectionString("PremodemSqlServerConnectionString"));
             });
             
             services.AddMvc();

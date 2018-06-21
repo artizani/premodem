@@ -12,6 +12,6 @@ namespace Premodem.Domain
         public string Description { get; set; }
         public int? EnergyId { get; set; }
 
-        public PremodemExpense PremodemExpense { get; set; }
+        public Expense Expense { get; set; }
     }
 }
