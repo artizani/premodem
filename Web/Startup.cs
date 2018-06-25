@@ -2,7 +2,7 @@ using System.IO;
 using EfData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -26,13 +26,18 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            services.AddScoped(typeof(IExpenseService), typeof(ExpenseService));
             //Add SQL Server support
-            services.AddDbContext<PremodemContext>(options => {
-                options.UseSqlServer(Configuration.GetConnectionString("PremodemSqlServerConnectionString"));
+            services.AddDbContext<PremodemContext>
+            (options => {
+                options.UseSqlServer(Configuration.GetConnectionString("PremodemContext"));
             });
             
-            services.AddMvc();
+           
+           
 
             //Handle XSRF Name for Header
             services.AddAntiforgery(options => {
@@ -66,10 +71,7 @@ namespace Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            
-//            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-//            loggerFactory.AddDebug();
-//            
+                   
             
             if (env.IsDevelopment())
             {

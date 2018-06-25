@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Premodem.Domain;
 
-namespace Domain.Services
+namespace Service
 {
     public interface IExpenseService
     {

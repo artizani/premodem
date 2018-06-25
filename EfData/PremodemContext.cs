@@ -24,13 +24,13 @@ namespace EfData
         public virtual DbSet<PremodemParts> PremodemParts { get; set; }
         public virtual DbSet<PremodemPeople> PremodemPeople { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("");
-            }
-        }
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//        {
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//                optionsBuilder.UseSqlServer("");
+//            }
+//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

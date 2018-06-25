@@ -4,19 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using EfData;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Premodem.Domain;
 
-namespace Domain.Services
+namespace Service
 {
     public class ExpenseService :IExpenseService
     {
        private readonly PremodemContext _context;
-        private readonly ILogger _logger;
+     //   private readonly ILogger _logger;
 
-        public ExpenseService(PremodemContext context, ILoggerFactory loggerFactory) {
+        public ExpenseService(PremodemContext context) {
           _context = context;
-          _logger = loggerFactory.CreateLogger("Premodem Repository");
+         // _logger = loggerFactory.CreateLogger("Premodem Repository");
         }
 
         public async Task<List<Expense>> GetExpensesAsync()
@@ -54,7 +53,7 @@ namespace Domain.Services
             }
             catch (System.Exception exp)
             {
-               _logger.LogError($"Error in {nameof(InsertExpenseAsync)}: " + exp.Message);
+             //  _logger.LogError($"Error in {nameof(InsertExpenseAsync)}: " + exp.Message);
             }
 
             return customer;
@@ -71,7 +70,7 @@ namespace Domain.Services
             }
             catch (Exception exp)
             {
-               _logger.LogError($"Error in {nameof(UpdateExpenseAsync)}: " + exp.Message);
+              // _logger.LogError($"Error in {nameof(UpdateExpenseAsync)}: " + exp.Message);
             }
             return false;
         }
@@ -91,7 +90,7 @@ namespace Domain.Services
             }
             catch (System.Exception exp)
             {
-               _logger.LogError($"Error in {nameof(DeleteExpenseAsync)}: " + exp.Message);
+              // _logger.LogError($"Error in {nameof(DeleteExpenseAsync)}: " + exp.Message);
             }
             return false;
         }

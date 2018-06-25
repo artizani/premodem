@@ -20,9 +20,6 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EfData\EfData.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
       <HintPath>..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.fileproviders.physical\2.1.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
     </Reference>
@@ -37,6 +34,10 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\Error.cshtml" />
     <UpToDateCheckInput Remove="Pages\_ViewImports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EfData\EfData.csproj" />
+    <ProjectReference Include="..\Service\Service.csproj" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
