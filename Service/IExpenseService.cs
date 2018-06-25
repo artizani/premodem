@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Premodem.Domain;
 
-namespace EfData.Repository
+namespace Domain.Services
 {
-    public interface IExpenseRepository
+    public interface IExpenseService
     {
         Task<List<Expense>> GetExpensesAsync();
         Task<PagingResult<Expense>> GetExpensesPageAsync(int skip, int take);

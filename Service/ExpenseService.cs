@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EfData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Premodem.Domain;
 
-namespace EfData.Repository
+namespace Domain.Services
 {
-    public class ExpenseRepository : IExpenseRepository
+    public class ExpenseService :IExpenseService
     {
-        
-        private readonly PremodemContext _context;
+       private readonly PremodemContext _context;
         private readonly ILogger _logger;
 
-        public ExpenseRepository(PremodemContext context, ILoggerFactory loggerFactory) {
+        public ExpenseService(PremodemContext context, ILoggerFactory loggerFactory) {
           _context = context;
           _logger = loggerFactory.CreateLogger("Premodem Repository");
         }
@@ -96,5 +96,5 @@ namespace EfData.Repository
             return false;
         }
 
-    }
+    } 
     }
