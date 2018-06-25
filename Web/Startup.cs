@@ -10,13 +10,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
         }
@@ -69,6 +70,11 @@ namespace Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
+//            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+//            loggerFactory.AddDebug();
+//            
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

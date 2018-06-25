@@ -1,0 +1,30 @@
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!expenses"><em>Loading...</em></p>
+
+<table class='table' *ngIf="expenses">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Title</th>
+      <th>Amount </th>
+      <th>Category</th>
+      <th>Personnel </th>
+      <th>PaidFrom</th>
+      <th>Settled Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let expense of expenses">
+      <td>{{ expense.date }}</td>
+      <td>{{ expense.title }}</td>
+      <td>{{ expense.amount }}</td>
+      <td>{{ expense.item }}</td>
+      <td>{{ expense.personnel }}</td>
+      <td>{{ expense.paidfrom }}</td>
+      <td>{{ expense.settledDate }}</td>
+    </tr>
+  </tbody>
+</table>
