@@ -1,6 +1,5 @@
 using System.IO;
 using EfData;
-using EfData.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,9 +38,6 @@ namespace Web
             services.AddAntiforgery(options => {
                 options.HeaderName = "X-XSRF-TOKEN";
             });
-
-            services.AddScoped<IExpenseRepository, ExpenseRepository>();
-           // services.AddTransient<CustomersDbSeeder>();
             
             //https://github.com/domaindrivendev/Swashbuckle.AspNetCore
             //https://localhost:5000/swagger
