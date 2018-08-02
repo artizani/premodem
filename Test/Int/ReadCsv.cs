@@ -13,7 +13,7 @@ namespace Int
         [Fact]
         public void ReadTest()
         {
-            var view =  Read("/tmp/expense.csv");
+            var view =  Read("expense.csv");
             List<ExpenseSheet> result = new List<ExpenseSheet>();
 
             foreach (var expense in view)
@@ -24,6 +24,7 @@ namespace Int
             }
         }
 
+        
         public IEnumerable<ExpenseSheet>  Read(string path)
         {
 
@@ -34,6 +35,22 @@ namespace Int
                 csv.Configuration.HasHeaderRecord = true;
                 return csv.GetRecords<ExpenseSheet>().ToList();
             }
+
+        }
+        
+        public string getFileFromResource(String fileName)
+        {
+            String strAppPath = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            String strFilePath = Path.Combine(strAppPath, "data");
+            return Path.Combine(strFilePath, fileName);
+        }
+        
+        
+        [Fact]
+        public void check()
+        {
+            ExpenseTransformer.Transform();
+            var tets = " ";
 
         }
     }

@@ -17,4 +17,10 @@
     <ProjectReference Include="..\..\EfData\EfData.csproj" />
     <ProjectReference Include="..\..\Service\Service.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="data\expense.csv" />
+    <Content Include="data\expense.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
